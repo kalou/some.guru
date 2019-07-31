@@ -1,0 +1,91 @@
+<html lang=en>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+
+	<script>
+		var navkit = (function() {
+			var forAllNodes = (fn) => {
+				document.querySelectorAll(".node").forEach((x) => {
+					fn(x);
+				});
+			};
+
+			var forAllOptions = (node) => {
+				return (fn) => {
+					node.querySelectorAll(".option").forEach((x) => fn(x));
+				}
+			};
+
+			var hide = (el) => {
+				el.classList.add("hidden");
+			};
+
+			var show = (el) => {
+				el.classList.remove("hidden");
+			}
+
+			var hideNode = (node) => {
+				hide(node)
+				forAllOptions(node)(hide);
+			}
+
+			var showNode = (node) => {
+				show(node)
+				forAllOptions(node)(show);
+			}
+
+			var jumpTo = (x) => {
+				if (x == null)
+					x = defaultNode;
+				forAllNodes(hideNode);
+				showNode(x);
+			};
+
+			var defaultNode;
+
+			return {
+				jumpTo: jumpTo,
+				initPage: (first) => {
+					// Watch window location and set visible node
+					window.onhashchange = (ev) => {
+						node = document.getElementById(location.hash.replace('#', ''));
+						jumpTo(node);
+					};
+					defaultNode = document.getElementById(first);
+					window.onhashchange();
+				}
+			}
+		})();
+	</script>
+
+	<body>
+		<div class=node id=0>
+			<a class=option href=#1>I'm depressed</a>
+			<a class=option href=#2>I'm bored</a>
+		</div>
+
+		<div class=node id=1>
+			<a class=option href=#3>It is because of suffering</a>
+			<a class=option href=#2>It is a lack of dopamine</a>
+			<a class=option href=#2>It is a lack of serotonine</a>
+		</div>
+
+		<div class=node id=2>
+			<a class=option href=#0>I'll fix it</a>
+		</div>
+
+		<div class=node id=3>
+			<a class=option href=#0>Cycle it.</a>
+			<a class=option href=#1>Try again.</a>
+		</div>
+
+		<div class=node id=999>
+			<a class=option>Javascript required</a>
+		</div>
+
+	</body>
+
+	<script> navkit.initPage('0') </script>
+</html>
