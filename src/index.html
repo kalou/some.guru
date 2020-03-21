@@ -1,120 +1,120 @@
 <html lang=en>
-	<head>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
 
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122925-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-122925-18');
-		</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122925-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-122925-18');
+        </script>
 
-		<script>
-			var navkit = (function() {
-				var forAllNodes = (fn) => {
-					document.querySelectorAll(".node").forEach((x) => {
-						fn(x);
-					});
-				};
+        <script>
+            var navkit = (function() {
+                var forAllNodes = (fn) => {
+                    document.querySelectorAll(".node").forEach((x) => {
+                        fn(x);
+                    });
+                };
 
-				var forAllOptions = (node) => {
-					return (fn) => {
-						node.querySelectorAll(".option").forEach((x) => fn(x));
-					}
-				};
+                var forAllOptions = (node) => {
+                    return (fn) => {
+                        node.querySelectorAll(".option").forEach((x) => fn(x));
+                    }
+                };
 
-				var hide = (el) => {
-					el.classList.add("hidden");
-				};
+                var hide = (el) => {
+                    el.classList.add("hidden");
+                };
 
-				var show = (el) => {
-					el.classList.remove("hidden");
-				}
+                var show = (el) => {
+                    el.classList.remove("hidden");
+                }
 
-				var hideNode = (node) => {
-					hide(node)
-					forAllOptions(node)(hide);
-				}
+                var hideNode = (node) => {
+                    hide(node)
+                    forAllOptions(node)(hide);
+                }
 
-				var showNode = (node) => {
-					show(node)
-					forAllOptions(node)(show);
-				}
+                var showNode = (node) => {
+                    show(node)
+                    forAllOptions(node)(show);
+                }
 
-				var jumpTo = (x) => {
-					if (x == null)
-						x = defaultNode;
-					forAllNodes(hideNode);
-					showNode(x);
-				};
+                var jumpTo = (x) => {
+                    if (x == null)
+                        x = defaultNode;
+                    forAllNodes(hideNode);
+                    showNode(x);
+                };
 
-				var defaultNode;
+                var defaultNode;
 
-				return {
-					jumpTo: jumpTo,
-					initPage: (first) => {
-						// Watch window location and set visible node
-						window.onhashchange = (ev) => {
-							node = document.getElementById(location.hash.replace('#', ''));
-							jumpTo(node);
-						};
-						defaultNode = document.getElementById(first);
-						window.onhashchange();
-					}
-				}
-			})();
-		</script>
-	</head>
+                return {
+                    jumpTo: jumpTo,
+                    initPage: (first) => {
+                        // Watch window location and set visible node
+                        window.onhashchange = (ev) => {
+                            node = document.getElementById(location.hash.replace('#', ''));
+                            jumpTo(node);
+                        };
+                        defaultNode = document.getElementById(first);
+                        window.onhashchange();
+                    }
+                }
+            })();
+        </script>
+    </head>
 
-	<body>
-		<div class=node id=0>
-			<h1>Are you happy?</h1>
-			<a class=option href=#200>Yes</a>
-			<a class=option href=#2>No</a>
-		</div>
+    <body>
+        <div class=node id=0>
+            <h1>Are you happy?</h1>
+            <a class=option href=#200>Yes</a>
+            <a class=option href=#2>No</a>
+        </div>
 
-		<div class=node id=2>
-			<h1>Pick the best option</h1>
-			<a class=option href=#3>I'm worried.</a>
-			<a class=option href=#6>I'm unhappy.</a>
-		</div>
+        <div class=node id=2>
+            <h1>Pick the best option</h1>
+            <a class=option href=#3>I'm worried.</a>
+            <a class=option href=#6>I'm unhappy.</a>
+        </div>
 
-		<div class=node id=3>
+        <div class=node id=3>
             <h1>Can you do something about it right now?</h1>
-			<a class=option href=#4>Yes, I can</a>
-			<a class=option href=#5>No, I have no control over it</a>
-			<a class=option href=#5>No, not now</a>
-		</div>
+            <a class=option href=#4>Yes, I can</a>
+            <a class=option href=#5>No, I have no control over it</a>
+            <a class=option href=#5>No, not now</a>
+        </div>
 
-		<div class=node id=4>
-			<a class=option>Do it now.</a>
-		</div>
+        <div class=node id=4>
+            <a class=option>Do it now.</a>
+        </div>
 
-		<div class=node id=5>
-			<a class=option>Let go. You'll handle it later.</a>
-		</div>
+        <div class=node id=5>
+            <a class=option>Let go. You'll handle it later.</a>
+        </div>
 
-		<div class=node id=6>
-			<h1>Do you want to be happy?</h1>
-			<a class=option href=#7>Of course!</a>
-			<a class=option href=#200>No</a>
-		</div>
+        <div class=node id=6>
+            <h1>Do you want to be happy?</h1>
+            <a class=option href=#7>Of course!</a>
+            <a class=option href=#200>No</a>
+        </div>
 
-		<div class=node id=7>
-			<a class=option>Change something.</a>
-		</div>
+        <div class=node id=7>
+            <a class=option>Change something.</a>
+        </div>
 
-		<div class=node id=200>
-			<a class=option>Keep doing whatever you're doing.</a>
-		</div>
+        <div class=node id=200>
+            <a class=option>Keep doing whatever you're doing.</a>
+        </div>
 
-		<div class=node id=999>
-			<a class=option>Javascript required</a>
-		</div>
+        <div class=node id=999>
+            <a class=option>Javascript required</a>
+        </div>
 
-	</body>
+    </body>
 
-	<script> navkit.initPage('0') </script>
+    <script> navkit.initPage('0') </script>
 </html>
